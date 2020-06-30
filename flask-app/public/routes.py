@@ -1,5 +1,6 @@
 from flask import Blueprint, url_for, session, make_response, redirect
 from functools import wraps
+from database import db, models
 import json
 
 public = Blueprint('public', '__name__')
@@ -16,16 +17,12 @@ def login_required(f):
 
 @public.route("/")
 def index():
-    session['user'] = 'Test'
     res = make_response("Hello World")
-    res.set_cookie("genericCookie", json.dumps({"key1":"value1","key2":"value2"}))
     return res
 
-@public.route("/user")
-def displayUser():
-    return session['user']
-
-@public.route("/logout")
-def logout():
-    session.clear()
-    return "Goodbye World!"
+@public.route("/test")
+def test():
+    branch = models.Branch.query.get(0)
+    name = branch.name
+    res = make_response(name)
+    return res

@@ -1,5 +1,4 @@
 from datetime import datetime
-import yaml
 
 def timestampToDate(input):
     try:
@@ -7,7 +6,3 @@ def timestampToDate(input):
         return datetime.date(ts)
     except:
         return None
-
-def yamlToDict(pathToFile:str):
-    with open(pathToFile) as f:
-        return yaml.safe_load(f)
