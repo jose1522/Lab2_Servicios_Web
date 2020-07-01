@@ -2,10 +2,7 @@ from core import *
 import platform
 
 osName = platform.system()
-app = create_app('Windows')
-
-if osName == 'Darwin':
-    app = create_app('Darwin')
+app = create_app(osName)
 
 if __name__ == "__main__":
     app.run()

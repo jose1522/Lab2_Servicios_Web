@@ -5,3 +5,4 @@ pyodbc
 sqlalchemy
 flask-sqlalchemy
 uwsgi
+netifaces

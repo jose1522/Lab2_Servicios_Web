@@ -17,3 +17,9 @@ services:
     restart: always
     ports:
       - "80:80"
+
+  comercio:
+    build: ./comercio
+    container_name: comercio
+    expose:
+      - 1433

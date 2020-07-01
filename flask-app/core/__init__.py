@@ -7,9 +7,9 @@ from .settings import *
 
 def loadConf(OS):
     if OS == 'Darwin':
-        return DarwinConfig()
+        return freeTDSConf()
     else:
-        return WindowsConfig()
+        return msodbcConf()
 
 def create_app(OS):
     app = Flask(__name__)
