@@ -1,9 +1,9 @@
 from flask import Flask
 import datetime
 from public.routes import public
-from api.routes import api
-from database import db
+from database import db, ma
 from .settings import *
+from flask_bootstrap import Bootstrap
 
 def loadConf(OS):
     if OS == 'Darwin':
@@ -18,9 +18,11 @@ def create_app(OS):
 
     # Register blueprints
     app.register_blueprint(public)
-    app.register_blueprint(api, url_prefix='/api')
 
     # Instantiate SQLAlchemy
     db.init_app(app)
+    ma.init_app(app)
+
+    Bootstrap(app)
 
     return app

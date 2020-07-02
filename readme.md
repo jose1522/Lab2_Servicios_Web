@@ -1,20 +1,27 @@
-# Description
 
-This is a template for creating a web application using python and flask as a backend.
+## Installation
 
-## Instalation
+You will need to download Docker. If you are using Linux, you will need to install docker compose separately.
 
-You need to install the requirements from the txt file, as well as redis (use brew for mac). In addition, you need to create a .env file with the environment variables.
+#### For Linux (Ubuntu):
+1. https://docs.docker.com/engine/install/ubuntu/
+2. https://docs.docker.com/compose/install/
 
-```bash
-pip install -r requirements.txt
-brew install redis
-```
+#### For Windows (Pro) / MacOS:
+https://docs.docker.com/engine/install/
+
 
 ## Usage
 
-Run the "run.py" file and the redis server on the default host/port
-```python
-python3 run.py
-redis-server
+
+Clone this repository and CD into the folder. For example
+```bash
+cd <your-path-to-the-file>/Lab2_Servicios_Web
 ```
+
+Run Docker-Compose from the repository folder
+```bash
+docker-compose up --build
+```
+
+Open your preferred browser and go to [localhost](http://localhost)

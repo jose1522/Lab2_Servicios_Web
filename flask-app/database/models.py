@@ -1,5 +1,5 @@
 # coding: utf-8
-from sqlalchemy import Column, DECIMAL, DateTime, ForeignKey, Index, Integer, LargeBinary, NCHAR, String, Unicode
+from sqlalchemy import Column, DECIMAL, DateTime, ForeignKey, Index, Integer, LargeBinary, NCHAR, String, Unicode, Float
 from sqlalchemy.dialects.mssql import BIT
 from sqlalchemy.orm import relationship
 from . import db
@@ -133,7 +133,7 @@ class Pedido(Model):
 
     Num_Pedido = Column(Integer, primary_key=True)
     Fecha_Pedido = Column(DateTime, nullable=False)
-    Monto_Pedido = Column(DECIMAL(15, 2), nullable=False)
+    Monto_Pedido = Column(Float(asdecimal=False), nullable=False)
     Cod_Proveedor = Column(ForeignKey('Proveedores.Cod_Proveedor'))
 
     Proveedore = relationship('Proveedore')

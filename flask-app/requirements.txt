@@ -6,3 +6,10 @@ sqlalchemy
 flask-sqlalchemy
 uwsgi
 netifaces
+marshmallow
+flask_marshmallow
+marshmallow-sqlalchemy
+json2xml
+flask-wtf
+wtforms
+flask-bootstrap
