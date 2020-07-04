@@ -4,6 +4,8 @@ from core.util import networking as net
 from database.queries import *
 from io import BytesIO
 from form.forms import *
+from werkzeug.utils import secure_filename
+from xml.etree.ElementTree import parse
 import json
 
 public = Blueprint('public', '__name__')
@@ -16,13 +18,23 @@ def test():
     res = make_response("{0}, {1}".format(name,net.getIP()))
     return res
 
+@public.route("/lab3")
+def lab3():
+    form = deserializationForm()
+    res = make_response(render_template('public/lab3.html', form=form))
+    return res
 
-@public.route("/", methods=['GET', 'POST'])
+@public.route("/")
 def index():
+    res = make_response(render_template('public/index.html'))
+    return res
+
+@public.route("/lab2", methods=['GET', 'POST'])
+def lab2():
     jsonResult: str
     xmlResult: str
     form = selectionForm()
-    response = make_response(render_template('/public/public_page.html', form=form))
+    response = make_response(render_template('/public/lab2.html', form=form))
 
     if request.method == 'POST':
         incomingForm = request.form

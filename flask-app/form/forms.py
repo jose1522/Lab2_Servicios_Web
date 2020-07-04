@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import SelectField, SubmitField
 from wtforms.validators import DataRequired
 
@@ -20,3 +21,11 @@ class selectionForm(FlaskForm):
                              (2, 'JSON')
                            ])
     download = SubmitField('Descargar')
+
+
+class deserializationForm(FlaskForm):
+    file = FileField(label='Elija un archivo XML',
+                     validators=[FileRequired(),
+                                  FileAllowed(['xml', 'XML'], 'Solo se permiten archivos XML')
+                                ])
+    upload = SubmitField('Deserializar archivo')

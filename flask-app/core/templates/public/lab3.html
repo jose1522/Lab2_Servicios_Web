@@ -1,0 +1,66 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "/public/base_page.html" %}
+
+{% block content %}
+<div class="content">
+    <div class="d-flex justify-content-center">
+        <div class="row p-3 mt-5">
+            <form class="form" id="xmlForm" method="post" role="form" enctype="multipart/form-data">
+                <div class="input-group mb-3 d-flex justify-content-center">
+                        <label for="inputGroupFile01">Seleccione para importar un archivo</label>
+                        <input type="file" class="btn btn-light" id="inputGroupFile01", required="required", type="file",
+                        accept="application/xml">
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{ wtf.form_field(form.upload, class="btn btn-primary") }}
+                </div>
+                <div>
+                    <div class="form-group mt-5">
+                        <label for="taResults">Resultados</label>
+                        <textarea class="form-control" id="taResults" rows="3"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+{{super()}}
+{% endblock %}
+<script>
+    var readXml = null;
+    var parser = new DOMParser();
+
+    $('#xmlForm').submit(function (event) {
+        event.preventDefault();
+        var selectedFile = document.getElementById('inputGroupFile01').files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            readXml = e.target.result;
+            var doc = parser.parseFromString(readXml, "text/xml");
+            //    console.log(doc);
+            printXMLFile(doc);
+        }
+        reader.readAsText(selectedFile);
+    });
+
+    function printXMLFile(doc) {
+        let valueList = []
+        let result = ""
+        let itemCollection = doc.getElementsByTagName("item")
+        for (const iterator of itemCollection) {
+            $items = $(iterator)
+            $items = $items[0].children
+            for (const item of $items) {
+                // console.log(item.innerHTML)
+                valueList.push(item.innerHTML)
+            }
+        }
+        console.log(valueList)
+        result = valueList.join(" | ")
+        $("#taResults").val(result)
+    };
+
+</script>
+{% endblock %}
